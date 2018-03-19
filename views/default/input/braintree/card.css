@@ -1,0 +1,13 @@
+[data-braintree] .card-errors {
+	@include elgg-message($(state-danger-font-color), $(state-danger-background-color), $(state-danger-border-color));
+	margin-top: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	border-width: 1px;
+	border-style: solid;
+}
+
+[data-braintree] .braintree-placeholder {
+	display: none;
+}

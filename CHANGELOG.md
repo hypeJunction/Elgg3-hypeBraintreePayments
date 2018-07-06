@@ -1,3 +1,13 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeBraintreePayments/compare/1.1.0...1.1.1) (2018-07-06)
+
+
+### Bug Fixes
+
+* **forms:** use new ajax form api to promise briantree token ([51c5cb5](https://github.com/hypeJunctionPro/Elgg3-hypeBraintreePayments/commit/51c5cb5))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/hypeJunctionPro/Elgg3-hypeBraintreePayments/compare/1.0.1...1.1.0) (2018-06-29)
 

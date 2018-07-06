@@ -3,8 +3,7 @@ define(function (require) {
 	var elgg = require('elgg');
 	var braintree = require('braintree');
 	var Ajax = require('elgg/Ajax');
-	var spinner = require('elgg/spinner');
-
+	var Form = require('ajax/Form');
 
 	var api = {
 		init: function (id) {
@@ -27,32 +26,28 @@ define(function (require) {
 				}
 
 				var $form = $elem.closest('form');
+				var form = new Form($form);
 
-				$form.uniqueId();
-
-				$(document).on('submit', '#' + $form.attr('id'), function (e) {
-					if (!$(this).has('[data-braintree]')) {
-						return;
+				form.onSubmit(function (resolve, reject) {
+					if (!$form.has('[data-braintree]')) {
+						return resolve();
 					}
 
-					e.preventDefault();
-
-					$('[type="submit"]', $form).prop('disabled', true);
-
-					spinner.start(elgg.echo('payments:braintree:card:processing'));
+					$token = $form.find('[name="braintree_token"]');
+					if ($token.val()) {
+						return resolve();
+					}
 
 					dropinInstance.requestPaymentMethod(function (err, payload) {
-
 						var $token = $form.find('[name="braintree_token"]');
 
 						if (payload.nonce || !$token.data('required')) {
 							$token.val(payload.nonce);
-							$form.get(0).submit();
+							return resolve();
 						} else if (err) {
 							$elem.find('.card-error').text(err.message);
+							return reject(err.message);
 						}
-
-						spinner.stop();
 					});
 
 					return false;
